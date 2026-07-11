@@ -1,4 +1,4 @@
-# honeypot-trap (decoyops)
+# Decoyops (A Honeypot Trap)
 
 A honeypot that plants fake credential files (`.env`, `~/.aws/credentials`) at paths
 attackers commonly scan for. Each file embeds a real AWS canary token minted from a
