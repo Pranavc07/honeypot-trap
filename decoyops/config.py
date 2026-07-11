@@ -7,12 +7,16 @@ BASE_DIR = Path(__file__).resolve().parent
 # --- Database ---
 DB_PATH = os.environ.get("DECOYOPS_DB_PATH", str(BASE_DIR / "decoyops.sqlite3"))
 
-# --- canarytokens.org ---
-CANARYTOKENS_API_BASE = os.environ.get("CANARYTOKENS_API_BASE", "https://canarytokens.org")
-CANARYTOKENS_AUTH_TOKEN = os.environ.get("CANARYTOKENS_AUTH_TOKEN", "")
+# --- canarytokens instance ---
+# Base URL of a self-hosted canarytokens server (or https://canarytokens.org
+# if you'd rather use the public instance). /generate is unauthenticated on
+# both, so no API key is needed here.
+CANARYTOKENS_API_BASE = os.environ.get("CANARYTOKENS_API_BASE", "http://localhost:8083")
 
-# Public URL this app is reachable at, used when registering the webhook
-# with canarytokens.org so it knows where to POST alerts.
+# Public URL webhook_receiver.py is reachable at. canarytokens pings this
+# URL and requires a 2xx response *before* it will mint a token, and it
+# refuses private/internal addresses -- this must be a real public URL
+# (e.g. an ngrok tunnel during local dev) before canary_client.py will work.
 WEBHOOK_PUBLIC_URL = os.environ.get("DECOYOPS_WEBHOOK_URL", "https://example.com/webhook")
 
 # --- Bait server ---

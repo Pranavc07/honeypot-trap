@@ -33,7 +33,7 @@ def register_bait_route(path: str, template_name: str):
     @app.get(path, name=f"bait_{template_name}")
     async def serve_bait(request: Request):
         token = mint_aws_key(memo=f"decoyops:{path}")
-        store.record_token(token["token_id"], "aws_keys", path)
+        store.record_token(token["token_id"], token["auth_token"], "aws_keys", path)
 
         visitor_id = store.upsert_visitor(
             ip_address=request.client.host if request.client else "unknown",

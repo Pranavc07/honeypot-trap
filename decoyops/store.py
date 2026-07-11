@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS visitors (
 CREATE TABLE IF NOT EXISTS tokens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     token_id TEXT UNIQUE NOT NULL,
+    auth_token TEXT NOT NULL,
     token_type TEXT NOT NULL,
     bait_path TEXT NOT NULL,
     created_at TEXT NOT NULL
@@ -86,11 +87,11 @@ def upsert_visitor(ip_address: str, user_agent: str) -> int:
         return cur.lastrowid
 
 
-def record_token(token_id: str, token_type: str, bait_path: str):
+def record_token(token_id: str, auth_token: str, token_type: str, bait_path: str):
     with get_conn() as conn:
         conn.execute(
-            "INSERT OR IGNORE INTO tokens (token_id, token_type, bait_path, created_at) VALUES (?, ?, ?, ?)",
-            (token_id, token_type, bait_path, now()),
+            "INSERT OR IGNORE INTO tokens (token_id, auth_token, token_type, bait_path, created_at) VALUES (?, ?, ?, ?, ?)",
+            (token_id, auth_token, token_type, bait_path, now()),
         )
 
 

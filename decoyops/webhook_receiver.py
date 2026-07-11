@@ -16,8 +16,10 @@ def startup():
 async def receive_webhook(request: Request):
     payload = await request.json()
 
-    token_id = payload.get("canarytoken") or payload.get("token")
-    source_ip = payload.get("src_ip") or request.headers.get("x-forwarded-for", "")
+    # canarytokens' "generic" webhook format (channel_output_webhook.py /
+    # webhook_formatting.py TokenAlertDetailGeneric): {token, src_ip, time, ...}
+    token_id = payload.get("token")
+    source_ip = payload.get("src_ip", "")
 
     store.record_usage_event(
         token_id=token_id,
