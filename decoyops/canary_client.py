@@ -1,9 +1,11 @@
-"""Client for a canarytokens server's /generate endpoint.
+"""Client for canarytokens.org's /generate endpoint.
 
-/generate is unauthenticated on both the public canarytokens.org instance
-and a self-hosted one -- the only prerequisite is that WEBHOOK_PUBLIC_URL
-already resolves and returns 2xx, since the server test-pings it before
-issuing a token.
+AWS-keys tokens are minted through Thinkst's proprietary AWS backend
+(AWSID_URL/AWSID_AUTH in their frontend settings), which isn't available on
+self-hosted instances -- so this targets the public canarytokens.org
+instance specifically. /generate is unauthenticated; the only prerequisite
+is that WEBHOOK_PUBLIC_URL already resolves and returns 2xx, since the
+server test-pings it before issuing a token.
 """
 import requests
 

@@ -71,11 +71,13 @@ decoyops/
 
 ### 1. A canarytokens server
 
-You need something running `POST /generate`. Either:
-
-- **Self-host** (recommended): run [thinkst/canarytokens](https://github.com/thinkst/canarytokens)
-  via their Docker setup, or
-- Point `CANARYTOKENS_API_BASE` at `https://canarytokens.org` and use the public instance.
+`CANARYTOKENS_API_BASE` defaults to `https://canarytokens.org`, the public instance, and
+that's intentional: AWS-keys tokens are minted through a proprietary AWS backend
+(`AWSID_URL`/`AWSID_AUTH`) that Thinkst's self-hosted [canarytokens](https://github.com/thinkst/canarytokens)
+Docker setup doesn't have access to — a self-hosted instance can mint other token types
+(DNS, web bug, MySQL, ...) but returns a 500 for `aws_keys` specifically. If you ever
+swap the bait to a self-hostable token type, self-hosting becomes viable; for AWS-keys
+bait, the public instance is the only option that actually works.
 
 ### 2. Install dependencies
 

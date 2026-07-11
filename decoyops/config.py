@@ -8,10 +8,11 @@ BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = os.environ.get("DECOYOPS_DB_PATH", str(BASE_DIR / "decoyops.sqlite3"))
 
 # --- canarytokens instance ---
-# Base URL of a self-hosted canarytokens server (or https://canarytokens.org
-# if you'd rather use the public instance). /generate is unauthenticated on
-# both, so no API key is needed here.
-CANARYTOKENS_API_BASE = os.environ.get("CANARYTOKENS_API_BASE", "http://localhost:8083")
+# AWS-keys tokens require Thinkst's proprietary AWS backend (AWSID_URL/AUTH),
+# which self-hosted instances don't have access to -- so this must point at
+# the public instance for AWS-keys tokens specifically. /generate is
+# unauthenticated, so no API key is needed here.
+CANARYTOKENS_API_BASE = os.environ.get("CANARYTOKENS_API_BASE", "https://canarytokens.org")
 
 # Public URL webhook_receiver.py is reachable at. canarytokens pings this
 # URL and requires a 2xx response *before* it will mint a token, and it
