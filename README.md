@@ -2,7 +2,7 @@
 
 A honeypot that plants fake credential files (`.env`, `~/.aws/credentials`) at paths
 attackers commonly scan for. Each file embeds a real AWS canary token minted from a
-[canarytokens](https://github.com/thinkst/canarytokens) server — a decoy credential
+[canarytokens](https://github.com/thinkst/canarytokens) server, a decoy credential
 that's silently monitored, so using it anywhere triggers an alert. decoyops logs who
 *scraped* the bait and correlates it with who later *used* the leaked key, turning a
 single "someone scanned me" alert into scanner IP → credential → user IP attribution.
