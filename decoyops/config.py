@@ -14,6 +14,11 @@ DB_PATH = os.environ.get("DECOYOPS_DB_PATH", str(BASE_DIR / "decoyops.sqlite3"))
 # unauthenticated, so no API key is needed here.
 CANARYTOKENS_API_BASE = os.environ.get("CANARYTOKENS_API_BASE", "https://canarytokens.org")
 
+# The frontend's API sub-app is mounted at this fixed path (see
+# ROOT_API_ENDPOINT in thinkst/canarytokens frontend/app.py) rather than at
+# the site root -- /generate alone 405s.
+CANARYTOKENS_API_PREFIX = "/d3aece8093b71007b5ccfedad91ebb11"
+
 # Public URL webhook_receiver.py is reachable at. canarytokens pings this
 # URL and requires a 2xx response *before* it will mint a token, and it
 # refuses private/internal addresses -- this must be a real public URL

@@ -103,6 +103,14 @@ def record_harvest_event(visitor_id: int, token_id: str, bait_path: str):
         )
 
 
+def token_exists(token_id: str) -> bool:
+    with get_conn() as conn:
+        row = conn.execute(
+            "SELECT 1 FROM tokens WHERE token_id = ?", (token_id,)
+        ).fetchone()
+        return row is not None
+
+
 def record_usage_event(token_id: str, source_ip: str, raw_payload: str):
     with get_conn() as conn:
         conn.execute(

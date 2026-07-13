@@ -11,7 +11,7 @@ import requests
 
 import config
 
-GENERATE_ENDPOINT = f"{config.CANARYTOKENS_API_BASE}/generate"
+GENERATE_ENDPOINT = f"{config.CANARYTOKENS_API_BASE}{config.CANARYTOKENS_API_PREFIX}/generate"
 
 
 def mint_aws_key(memo: str) -> dict:
