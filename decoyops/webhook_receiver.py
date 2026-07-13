@@ -12,6 +12,7 @@ from fastapi import FastAPI, Request
 import config
 import store
 
+logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("decoyops.webhook_receiver")
 
 app = FastAPI(title="decoyops webhook receiver")
@@ -37,6 +38,7 @@ async def receive_webhook(request: Request):
             source_ip=source_ip,
             raw_payload=str(payload),
         )
+        log.info("Recorded usage_event for token %s from %s", token_id, source_ip)
     else:
         log.info("Ignoring webhook payload with unrecognized token: %s", payload)
 
